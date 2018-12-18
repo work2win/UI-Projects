@@ -1,0 +1,160 @@
+$bg: #353432;
+
+.wrapper {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.col {
+  width: 33.333%;
+
+  padding: 20px;
+
+  background: $bg;
+  border-top: 10px solid #FE8B05;
+}
+
+// ------------------------------------------------------
+// Equal Height Grid using :after and float
+// Works by using padding-top: with 100% on the :after
+// Issues:
+// - Height doesn't expand so if content goes taller
+//  than it's container it will overflow
+// - requires having separate rows for each so can be
+//   difficult to change amount of cols per row based on
+//   screen size
+// ------------------------------------------------------
+.grid-after {
+  .col {
+    width: 32%;
+    max-height: 300px;
+
+    float: left;
+    
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 20px;
+
+    position: relative;
+
+    &:after {
+      content: "";
+
+      display: block;
+
+      padding-top: 100%;
+    }
+    
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .inner {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+
+// ------------------------------------------------------
+// Equal Height Grid using Table-Cell
+// Works by using padding-top: with 100% on the :after
+// Benefits:
+// - Equal height columns with dynamic content length
+// - Great browser support if you need to support older ie
+// Issues:
+// - requires having separate rows for each so can be
+//   difficult to change amount of cols per row based on
+//   screen size
+// ------------------------------------------------------
+.grid-table-cell {
+  .col {
+    display: table-cell;
+  }
+}
+
+
+// ------------------------------------------------------
+// Equal Height Grid using Table-Cell
+// Works by using padding-top: with 100% on the :after
+// Benefits:
+// - Equal height columns with dynamic content length
+// - Pretty good browser support using prefixes
+// - Allows for a lot of options with respositioning
+//   content at different breakpoints
+// Issues:
+// - if you need to support ie9 and below will require
+//   fallbacks
+// ------------------------------------------------------
+.grid-flex {
+  display: flex;
+  flex-wrap: wrap;
+  
+  .col {
+    width: calc(33.3333% - 20px);
+    
+    margin-right: 20px;
+    margin-bottom: 20px;
+    
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+}
+
+
+
+
+
+// Base Styles
+* {
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  height: 100%;
+  
+  padding: 40px;
+  
+  background: #fff;
+}
+h1 {
+  margin: 0;
+  
+  color: #2B4E72;
+  font-size: 60px;
+}
+h2 {
+  margin-top: 50px;
+  margin-bottom: 10px;
+  
+  color: #2B4E72;
+  font-size: 30px;
+  
+  &:first-of-type {
+    margin-top: 20px;
+  }
+}
+h3 {
+  margin: -20px -20px 15px -20px;
+  padding: 20px 20px 10px;
+  
+  background: #efefef;
+
+  color: #FE8B05;
+}
+p {
+  margin: 0;
+
+  color: #efefef;
+}
